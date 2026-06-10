@@ -1,0 +1,27 @@
+# Deep Learning
+tensorflow==2.18.0
+keras==3.14.0
+
+# Image Processing
+Pillow
+
+# Data Processing
+numpy
+
+# API
+fastapi
+uvicorn
+python-multipart
+
+# Dashboard
+streamlit
+requests
+
+# AI
+groq
+
+# Environment
+python-dotenv
+
+# Machine Learning utilities
+scikit-learn

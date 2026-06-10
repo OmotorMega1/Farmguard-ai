@@ -1,0 +1,35 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/
+
+# Data — too large to include in image
+data/
+
+# Environment
+.env
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# VS Code
+.vscode/
+
+# Temp files
+temp_uploads/
+
+# Logs
+*.log

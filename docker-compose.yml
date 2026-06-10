@@ -1,0 +1,38 @@
+# FarmGuard AI — Docker Compose
+# Runs FastAPI and Streamlit together as separate services
+
+version: '3.8'
+
+services:
+
+  # SERVICE 1 — FastAPI Backend
+  api:
+    build: .
+    # image: farmguard-api:1.0
+    container_name: farmguard_api
+    ports:
+      - "8000:8000"
+      - "8501:8501" # For Streamlit API calls
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+    env_file:
+      - .env
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000
+    restart: unless-stopped
+
+  # SERVICE 2 — Streamlit Dashboard
+  dashboard:
+    build: .
+    # image: farmguard-ai-dashboard:latest
+    container_name: farmguard_dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./models:/app/models
+    env_file:
+      - .env
+    command: streamlit run dashboard/app.py --server.port 8501 --server.address 0.0.0.0
+    depends_on:
+      - api
+    restart: unless-stopped
