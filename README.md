@@ -30,7 +30,7 @@ Solution: Upload a leaf photo → get an instant AI-powered diagnosis and treatm
 
 ## Features
 
-- **Disease Detection** — CNN model (MobileNetV2 Transfer Learning) detects 6 crop disease classes with 97.3% accuracy
+- **Disease Detection** —  CNN model (MobileNetV2 Transfer Learning) detects 6 crop disease classes with 97.3% accuracy
 - **Severity Prediction** — Confidence-based severity mapping (Mild / Moderate / Severe)
 - **AI Treatment Recommendations** — Groq AI (Llama 3.3) generates contextual treatment advice per disease
 - **Healthy Crop Detection** — Generates encouragement messages for healthy crops
@@ -40,17 +40,15 @@ Solution: Upload a leaf photo → get an instant AI-powered diagnosis and treatm
 ## Tech Stack
 Layers and Technology.
 
-```
-Model: TensorFlow 2.18, Keras, MobileNetV2 
-Backend: FastAPI, Uvicorn 
-Frontend: Streamlit 
-Gen AI: Groq API (Llama 3.3-70b-versatile) 
-Image Processing: Pillow, NumPy 
-ML Utilities: Scikit-learn 
-Containerization: Docker, Docker Compose 
-Environment: Python 3.10, python-dotenv 
+- **Model** — TensorFlow 2.18, Keras, MobileNetV2 
+- **Backend** — FastAPI, Uvicorn 
+- **Frontend** — Streamlit 
+- **Gen AI** — Groq API (Llama 3.3-70b-versatile) 
+- **Image Processing** — Pillow, NumPy 
+- **ML Utilities** — Scikit-learn 
+- **Containerization** — Docker, Docker Compose 
+- **Environmen** — Python 3.10, python-dotenv 
 
-```
 ## Project Structure
 
 ```
@@ -87,13 +85,13 @@ farmguard-ai/
 
 | Metric | Value |
  
-| Architecture | MobileNetV2 + Custom Dense Layers |
-| Training technique | Transfer Learning (ImageNet) |
-| Regularization | L2 (λ=0.01) + Data Augmentation |
-| Best val accuracy | 98.3% |
-| Test accuracy | **97.32%** |
-| Total classes | 6 |
-| Test set size | 934 images |
+- **Architecture** — MobileNetV2 + Custom Dense Layers 
+- **Training technique** — Transfer Learning (ImageNet) 
+- ** Regularization** —  L2 (λ=0.01) + Data Augmentation 
+- ** Best val accuracy** —  *98.3% 
+- ** Test accuracy** —  *97.32%
+- **  Total classes** — 6 
+- ** Test set size** — 934 images 
 
 
 ### Classification Report:
@@ -227,9 +225,10 @@ Example output:
 
 ### Solving the Class Imbalance
 
-We addressed the Potato Healthy imbalance using class weights. — telling the model that mistakes on rare classes are more costly during training.
+We addressed the Potato Healthy imbalance using class weights. telling the model that mistakes on rare classes are more costly during training.
 
 ```python
+from sklearn.utils.class_weight import compute_class_weight
 class_weights = compute_class_weight(class_weight='balanced', ...)
 
 # Resulting weights:
@@ -295,14 +294,14 @@ The trained model sitting in a `.h5` file does nothing on its own. We needed cod
 Jupyter notebooks are for experimentation. Production code belongs in `.py` files — they are cleaner, importable by other modules, and version-controllable.
 
 # Key functions:
-```
-| Function | Purpose |
- `preprocess_image()`: Resizes farmer's photo to 224×224, normalises pixels to 0–1 
- `predict_disease()`: Runs image through CNN, returns disease + confidence + severity 
- `get_severity()`: Maps confidence score to Mild / Moderate / Severe 
- `generate_treatment()`: Calls Groq AI to write a contextual treatment recommendation 
- `analyze_leaf()`: Master function — coordinates all of the above in sequence 
-```
+Function & Purpose
+- **preprocess_image()**: Resizes farmer's photo to 224×224, normalises pixels to 0–1 
+- **predict_disease()**: Runs image through CNN, returns disease + confidence + severity 
+- **get_severity()**: Maps confidence score to Mild / Moderate / Severe 
+- **generate_treatment**: Calls Groq AI to write a contextual treatment recommendation 
+- **analyze_leaf()**: Master function, it coordinates all the other functions in the exact sequence 
+
+
 **The complete flow inside `predict.py`:**
 
 ```
@@ -338,28 +337,18 @@ GET  /          → confirms the server is running
 GET  /health    → checks model and API are both operational
 POST /predict   → receives a leaf image, returns full disease analysis
 GET  /classes   → lists all 6 supported disease classes
-```
 
-**How the `/predict` endpoint works:**
-
-```
-1. Receives leaf image uploaded from dashboard
-2. Validates it is actually an image file (not a PDF, Word doc, etc.)
-3. Saves it temporarily with a UUID filename (prevents filename collisions)
-4. Calls analyze_leaf() from predict.py
-5. Returns full JSON result to the dashboard
-6. Deletes the temporary file — always, even if prediction fails
 ```
 
 
 ### Step 7 — Build the Dashboard (`dashboard/app.py`)
 
-With a working API, we built the farmer-facing interface using **Streamlit** — a Python library that creates interactive web apps without HTML, CSS or JavaScript.
+With a working API, we built the farmer-facing interface using **Streamlit**, a Python library that creates interactive web apps without HTML, CSS or JavaScript.
 
 # Why Streamlit?
 - Build web apps entirely in Python
 - Perfect for ML demos and production tools
-- Rapid development — a full dashboard in one file
+- Rapid development and a full dashboard in one file
 
 # How the dashboard communicates with the API:
 
@@ -410,7 +399,7 @@ The test file imports directly from `predict.py` — no duplicate code. If `pred
 
 Finally, we packaged the entire application into Docker containers so it runs consistently on any machine — no manual Python setup, no package installation, no configuration differences.
 
-```bash
+```
 docker-compose up    # starts FastAPI + Streamlit together
 docker-compose down  # stops everything cleanly
 ```
