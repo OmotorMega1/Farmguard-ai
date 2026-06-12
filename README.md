@@ -487,7 +487,7 @@ Each step builds on the previous one. This is the proven, professional order for
 ### 1. Clone the repository
 
 ```b
-git clone https://github.com/your-username/farmguard-ai.git
+git clone https://github.com/OmotorMega1/farmguard-ai.git
 cd farmguard-ai
 ```
 
@@ -548,7 +548,7 @@ Dashboard running at: `http://localhost:8501`
 ## API Endpoints
 
 | Method | Endpoint | Description |
-|---|---|---|
+
 | `GET` | `/` | Confirms API is running |
 | `GET` | `/health` | Health check — model and API status |
 | `POST` | `/predict` | Upload leaf image → returns prediction + AI recommendation |
@@ -606,6 +606,7 @@ PASSED ✅ — Severity Mapping
 ### Build and run
 
 ```
+docker build -t farmguard-ai
 docker-compose up
 ```
 
