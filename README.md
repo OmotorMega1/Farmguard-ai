@@ -38,17 +38,19 @@ Solution: Upload a leaf photo → get an instant AI-powered diagnosis and treatm
 - **Interactive Dashboard** — Streamlit frontend with dark theme and real-time results
 
 ## Tech Stack
+Layers and Technology.
 
-| Layer | Technology |
-| Model | TensorFlow 2.18, Keras, MobileNetV2 |
-| Backend | FastAPI, Uvicorn |
-| Frontend | Streamlit |
-| Gen AI | Groq API (Llama 3.3-70b-versatile) |
-| Image Processing | Pillow, NumPy |
-| ML Utilities | Scikit-learn |
-| Containerization | Docker, Docker Compose |
-| Environment | Python 3.10, python-dotenv |
+```
+Model: TensorFlow 2.18, Keras, MobileNetV2 
+Backend: FastAPI, Uvicorn 
+Frontend: Streamlit 
+Gen AI: Groq API (Llama 3.3-70b-versatile) 
+Image Processing: Pillow, NumPy 
+ML Utilities: Scikit-learn 
+Containerization: Docker, Docker Compose 
+Environment: Python 3.10, python-dotenv 
 
+```
 ## Project Structure
 
 ```
